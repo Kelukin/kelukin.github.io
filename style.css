@@ -1,4 +1,32 @@
 body {
+/* Mobile optimization for article page */
+@media (max-width: 600px) {
+    .article-layout {
+        flex-direction: column;
+        gap: 0;
+    }
+    #article-content.article-container {
+        padding: 1rem;
+        margin: 0;
+        max-width: 100%;
+    }
+    #sidebar {
+        width: 100%;
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+    #sidebar h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    #sidebar ul {
+        padding: 0;
+    }
+    #sidebar li a {
+        font-size: 1rem;
+        padding: 8px;
+    }
+}
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     background-color: #121212;

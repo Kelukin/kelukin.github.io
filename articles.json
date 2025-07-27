@@ -1,12 +1,12 @@
 {
     "articles": [
         {
-            "id": "article1",
-            "title_en": "My First Article",
-            "title_zh": "我的第一篇文章",
+            "id": "agents-era-reflection",
+            "title_en": "Reflections on the Era of Agents",
+            "title_zh": "Agent 时代随想",
             "date": "2025-07-27",
-            "summary_en": "This is a summary of my first article. It's about my journey into programming.",
-            "summary_zh": "这是我第一篇文章的摘要。它关于我编程的旅程。"
+            "summary_en": "Reflections on how AI agents are transforming the tech industry, labor markets, and the future of software development.",
+            "summary_zh": "关于AI智能体如何改变科技行业、劳动力市场和软件开发未来的思考。"
         }
     ]
 }

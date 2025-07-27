@@ -1,5 +1,5 @@
 
-# Reflections on the Era of Agents
+# Reflections on the Age of Agents
 
 ## Background
 A few weeks ago, I was still oblivious to the transformative impact Agents are having on the tech industry. My understanding of AI programming tools was stuck at last year’s level: simple autocompletion, not-so-smart unit test generation. Social media was flooded with AI-themed videos, most of which felt like sponsored content from model vendors, with everyone excitedly proclaiming a new industrial revolution. I was skeptical, convinced that these tools merely summarized text or performed straightforward analysis when given enough context, but couldn’t achieve the kind of synthesis that humans do—connecting concepts across unrelated domains. Plus, I didn’t want to pay for work tools out of pocket, and using Cursor Coding required a subscription. My codebase at work is massive (about 70GB), and I’d heard that current tools don’t handle such large projects well, so I wasn’t eager to try them.
