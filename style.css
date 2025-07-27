@@ -6,6 +6,53 @@ body {
     line-height: 1.6;
 }
 
+/* Mobile optimization */
+@media (max-width: 600px) {
+    nav {
+        padding: 0.5rem;
+        font-size: 1rem;
+        position: static;
+    }
+    #lang-switcher {
+        margin-left: 0;
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+    main {
+        padding-top: 0;
+    }
+    #hero {
+        height: 40vh;
+        padding: 1rem 0;
+    }
+    .hero-text {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+    section {
+        padding: 2rem 1rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .article-card, .job {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .article-layout {
+        flex-direction: column;
+        gap: 0;
+    }
+    #sidebar {
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .social-links {
+        font-size: 1.2rem;
+    }
+}
+
 header {
     display: none; /* Hero section replaces this */
 }
