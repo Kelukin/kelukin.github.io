@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const translations = {
         en: {
             welcome: "Welcome to Kelukin Lau's Page",
-            heroSubtitle: "Software Engineer | Thinker | Explorer",
+            heroSubtitle: "Software Engineer ( May be Thinker | Explorer as well) ",
             navAbout: "About Me",
             navProjects: "Projects",
             navExperience: "Work Experience",
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         zh: {
             welcome: "欢迎来到刘笑尘的主页",
-            heroSubtitle: "软件工程师 | 思考者 | 探索者",
+            heroSubtitle: "软件工程师 (可能也是思考者 | 探索者)",
             navAbout: "关于我",
             navProjects: "项目",
             navExperience: "工作经历",
@@ -76,7 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let currentLanguage = 'en';
+    // Function to detect browser language preference
+    const detectBrowserLanguage = () => {
+        // Get the browser's language preference
+        const browserLang = navigator.language || navigator.userLanguage || 'en';
+        
+        // Check if the browser language starts with 'zh' (Chinese variants)
+        if (browserLang.toLowerCase().startsWith('zh')) {
+            return 'zh';
+        }
+        
+        // Default to English for all other languages
+        return 'en';
+    };
+
+    let currentLanguage = detectBrowserLanguage();
 
     const applyTranslations = (lang) => {
         document.querySelectorAll('[data-key]').forEach(elem => {
@@ -91,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLanguage = lang;
         applyTranslations(lang);
         loadArticles(lang);
+        
+        // Update button states
+        document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+        document.getElementById('lang-zh').classList.toggle('active', lang === 'zh');
     };
 
     const loadArticles = (lang) => {
@@ -121,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
     document.getElementById('lang-zh').addEventListener('click', () => setLanguage('zh'));
 
-    // Initial load
-    applyTranslations(currentLanguage);
-    loadArticles(currentLanguage);
+    // Initial load with detected language
+    setLanguage(currentLanguage);
 });
