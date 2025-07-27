@@ -1,0 +1,12 @@
+{
+    "articles": [
+        {
+            "id": "article1",
+            "title_en": "My First Article",
+            "title_zh": "我的第一篇文章",
+            "date": "2025-07-27",
+            "summary_en": "This is a summary of my first article. It's about my journey into programming.",
+            "summary_zh": "这是我第一篇文章的摘要。它关于我编程的旅程。"
+        }
+    ]
+}

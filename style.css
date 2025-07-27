@@ -1,0 +1,192 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+header {
+    display: none; /* Hero section replaces this */
+}
+
+nav {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #1db954;
+}
+
+#lang-switcher {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#lang-switcher button {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#lang-switcher button:hover {
+    background-color: #1db954;
+    color: #121212;
+}
+
+main {
+    padding-top: 60px; /* Adjust for fixed nav */
+}
+
+#hero {
+    background: url('https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+section {
+    padding: 4rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid #333;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #1db954;
+}
+
+.project, .job {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover, .job:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.article-container {
+    background: #1e1e1e;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.article-card {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.article-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+#sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar li a {
+    display: block;
+    padding: 10px;
+    background: #1e1e1e;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #1db954;
+    transition: background-color 0.3s;
+}
+
+#sidebar li a:hover {
+    background-color: #333;
+}
+
+.article-card h3 {
+    color: #1db954;
+}
+
+.article-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.job-info {
+    font-style: italic;
+    color: #aaa;
+}
+
+.social-links a {
+    color: #1db954;
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e1e1e;
+    color: #aaa;
+}

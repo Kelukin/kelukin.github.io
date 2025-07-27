@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1 data-key="welcome">Welcome to My Page</h1>
+    </header>
+    <nav>
+        <a href="#about" data-key="navAbout">About Me</a>
+        <a href="#projects" data-key="navProjects">Projects</a>
+        <a href="#experience" data-key="navExperience">Work Experience</a>
+        <a href="#articles" data-key="navArticles">Articles</a>
+        <a href="#contact" data-key="navContact">Contact</a>
+        <div id="lang-switcher">
+            <button id="lang-en">English</button>
+            <button id="lang-zh">中文</button>
+        </div>
+    </nav>
+    <main>
+        <section id="hero">
+            <div class="hero-text">
+                <h1 data-key="welcome">Welcome to My Page</h1>
+                <p data-key="heroSubtitle">Software Engineer | Thinker | Explorer</p>
+            </div>
+        </section>
+        <section id="about">
+            <h2 data-key="aboutTitle">About Me</h2>
+            <p data-key="aboutText">Hello! I'm Kelukin Lau. I'm a software engineer based in Shanghai. I'm passionate about scuba diving, programing, thinking, philosophy.</p>
+        </section>
+        <section id="projects">
+            <h2 data-key="projectsTitle">Projects</h2>
+            <div class="project">
+                <h3 data-key="project1Title">Project 1</h3>
+                <p data-key="project1Desc">A brief description of your first project.</p>
+            </div>
+            <div class="project">
+                <h3 data-key="project2Title">Project 2</h3>
+                <p data-key="project2Desc">A brief description of your second project.</p>
+            </div>
+        </section>
+        <section id="experience">
+            <h2 data-key="experienceTitle">Work Experience</h2>
+            <div class="job">
+                <h3 data-key="job1Title">SDE II at Microsoft</h3>
+                <p class="job-info"><span data-key="job1Date">Sep 2024 - Present</span> | <span data-key="job1Location">Shanghai, China</span></p>
+                <h4 data-key="job1Team">Microsoft Exchange Server | Mail-Service Team</h4>
+                <ul>
+                    <li data-key="job1Resp1">Responsible for the Mailbox Rules module, including feature alignment from Win32 to web, rapid incident response, and the design and implementation of backend monitoring metrics.</li>
+                    <li data-key="job1Resp2">Participated in the modernization of Exchange Server architecture, contributing to the evolution of a legacy system into a more efficient and maintainable platform.</li>
+                </ul>
+                <p><strong>Skills:</strong> <span data-key="job1Skills">.NET Framework · Full-Stack Development</span></p>
+            </div>
+            <div class="job">
+                <h3 data-key="job2Title">SDE at Microsoft</h3>
+                <p class="job-info"><span data-key="job2Date">Jul 2021 - Sep 2024</span> | <span data-key="job2Location">Shanghai, China</span></p>
+                <h4 data-key="job2Team">Microsoft Purview (formerly Azure Purview)</h4>
+                <ul>
+                    <li data-key="job2Resp1">Led the metadata migration from Azure Purview to Microsoft Purview, focusing on database traffic management, monitoring metrics, and proactive alerting to ensure a smooth and reliable transition.</li>
+                    <li data-key="job2Resp2">Drove the development of the Purview-Egeria Connector, enabling integration of external metadata platforms into Microsoft Purview.</li>
+                    <li data-key="job2Resp3">Actively contributed to DevOps operations, supporting CI/CD pipelines and maintaining system stability within the team.</li>
+                </ul>
+                <p><strong>Skills:</strong> <span data-key="job2Skills">Java · Metadata Management · DevOps</span></p>
+            </div>
+        </section>
+        <section id="articles">
+            <h2 data-key="articlesTitle">My Articles</h2>
+            <div id="articles-list"></div>
+        </section>
+        <section id="contact">
+            <h2 data-key="contactTitle">Contact Me</h2>
+            <p data-key="contactText">You can reach me at kelukin@gmail.com</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/kelukin-lau/" target="_blank"><i class="fab fa-linkedin"></i> <span data-key="linkedinLink">LinkedIn</span></a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p data-key="footerText">&copy; 2025 [Your Name]</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

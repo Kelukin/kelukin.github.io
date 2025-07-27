@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" data-key="navHome">Home</a>
+        <div id="lang-switcher">
+            <button id="lang-en">English</button>
+            <button id="lang-zh">中文</button>
+        </div>
+    </nav>
+    <main>
+        <div class="article-layout">
+            <div id="article-content" class="article-container"></div>
+            <aside id="sidebar">
+                <h3 data-key="otherArticles">Other Articles</h3>
+                <ul id="articles-list-sidebar"></ul>
+            </aside>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Kelukin Lau</p>
+    </footer>
+    <script src="article.js"></script>
+</body>
+</html>
