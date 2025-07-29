@@ -6,7 +6,8 @@
             "title_zh": "Agent 时代随想",
             "date": "2025-07-27",
             "summary_en": "Reflections on how AI agents are transforming the tech industry, labor markets, and the future of software development.",
-            "summary_zh": "关于AI智能体如何改变科技行业、劳动力市场和软件开发未来的思考。"
+            "summary_zh": "关于AI智能体如何改变科技行业、劳动力市场和软件开发未来的思考。",
+            "github_issue": 1
         }
     ]
 }

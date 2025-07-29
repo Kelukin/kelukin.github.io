@@ -272,6 +272,141 @@ h2 {
     color: #fff;
 }
 
+/* Comment System Styles */
+.comments-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #333;
+}
+
+.comments-container h3 {
+    color: #1db954;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+#comments-list {
+    margin-bottom: 2rem;
+}
+
+.comment {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #1db954;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    gap: 0.8rem;
+}
+
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #1db954;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #1db954;
+}
+
+.comment-date {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.comment-body {
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.comment-body p {
+    margin-bottom: 0.8rem;
+}
+
+.comment-body code {
+    background: #2a2a2a;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #1db954;
+}
+
+.comment-body pre {
+    background: #2a2a2a;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.loading-comments {
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.no-comments {
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.comment-action {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #333;
+}
+
+.comment-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #1db954, #1ed760);
+    color: #121212;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+.comment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+    color: #121212;
+}
+
+/* Mobile optimization for comments */
+@media (max-width: 600px) {
+    .comments-container {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .comment {
+        padding: 1rem;
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .comment-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
 footer {
     text-align: center;
     padding: 20px;

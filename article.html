@@ -17,7 +17,20 @@
     </nav>
     <main>
         <div class="article-layout">
-            <div id="article-content" class="article-container"></div>
+            <div id="article-content" class="article-container">
+                <!-- Article content will be loaded here -->
+                <div id="comments-section" class="comments-container">
+                    <h3 data-key="commentsTitle">Comments</h3>
+                    <div id="comments-list">
+                        <div class="loading-comments" data-key="loadingComments">Loading comments...</div>
+                    </div>
+                    <div class="comment-action">
+                        <a id="add-comment-link" href="#" target="_blank" class="comment-btn" data-key="addComment">
+                            💬 Join the Discussion on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
             <aside id="sidebar">
                 <h3 data-key="otherArticles">Other Articles</h3>
                 <ul id="articles-list-sidebar"></ul>
