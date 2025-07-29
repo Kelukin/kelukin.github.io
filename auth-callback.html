@@ -57,14 +57,13 @@
                 <p><a href="#" onclick="window.close()">Close this window</a></p>
             `;
         } else if (code) {
-            // Store the code temporarily and redirect back to article page
-            sessionStorage.setItem('github_oauth_code', code);
-            
             // Get the return URL (article page)
             const returnUrl = sessionStorage.getItem('oauth_return_url') || '/';
-            
-            // Redirect back to the article page
-            window.location.href = returnUrl;
+            // Remove any existing code param from returnUrl
+            let url = new URL(returnUrl, window.location.origin);
+            url.searchParams.set('code', code);
+            // Redirect back to the article page with code param
+            window.location.href = url.toString();
         } else {
             document.querySelector('.callback-container').innerHTML = `
                 <h2>Invalid Callback</h2>

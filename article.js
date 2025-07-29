@@ -191,6 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const initiateGitHubLogin = () => {
+        // Save current URL (with query params) for redirect after OAuth
+        sessionStorage.setItem('oauth_return_url', window.location.href);
         const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=public_repo`;
         window.location.href = authUrl;
     };
