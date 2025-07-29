@@ -57,8 +57,14 @@
                 <p><a href="#" onclick="window.close()">Close this window</a></p>
             `;
         } else if (code) {
-            // Get the return URL (article page)
-            const returnUrl = sessionStorage.getItem('oauth_return_url') || '/';
+            // Use the state param to get the return URL
+            let returnUrl = '/';
+            const state = urlParams.get('state');
+            if (state) {
+                try {
+                    returnUrl = decodeURIComponent(state);
+                } catch (e) {}
+            }
             // Remove any existing code param from returnUrl
             let url = new URL(returnUrl, window.location.origin);
             url.searchParams.set('code', code);
