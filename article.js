@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const script = document.createElement('script');
         script.src = 'https://utteranc.es/client.js';
         script.setAttribute('repo', 'Kelukin/kelukin.github.io');
-        script.setAttribute('issue-term', `article-${articleId}`); // Use article ID as issue term
+        script.setAttribute('issue-term', 'pathname'); // Use pathname to maintain compatibility
         script.setAttribute('theme', 'dark-blue');
         script.setAttribute('crossorigin', 'anonymous');
         script.setAttribute('async', '');
