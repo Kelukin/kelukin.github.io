@@ -54,20 +54,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadUtterancesComments = (articleId) => {
         const utterancesContainer = document.getElementById('utterances-container');
+        const loadingMessage = document.getElementById('comments-loading');
         
-        // Clear any existing comments
-        utterancesContainer.innerHTML = '';
+        // Clear any existing comments but keep loading message initially
+        const existingScript = utterancesContainer.querySelector('script[src*="utteranc.es"]');
+        if (existingScript) {
+            existingScript.remove();
+        }
         
-        // Create Utterances script
-        const script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.setAttribute('repo', 'Kelukin/kelukin.github.io');
-        script.setAttribute('issue-term', 'pathname'); // Use pathname to maintain compatibility
-        script.setAttribute('theme', 'dark-blue');
-        script.setAttribute('crossorigin', 'anonymous');
-        script.setAttribute('async', '');
-        
-        utterancesContainer.appendChild(script);
+        // Safari-compatible approach: Add a small delay and ensure proper DOM readiness
+        setTimeout(() => {
+            // Create Utterances script with Safari-friendly attributes
+            const script = document.createElement('script');
+            script.src = 'https://utteranc.es/client.js';
+            script.setAttribute('repo', 'Kelukin/kelukin.github.io');
+            script.setAttribute('issue-term', 'pathname');
+            script.setAttribute('theme', 'dark-blue');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true; // Use property instead of setAttribute for better Safari compatibility
+            
+            // Safari-specific: Ensure script loads properly
+            script.onload = () => {
+                console.log('Utterances script loaded successfully');
+                if (loadingMessage) {
+                    loadingMessage.style.display = 'none';
+                }
+            };
+            
+            script.onerror = () => {
+                console.error('Failed to load Utterances script');
+                if (loadingMessage) {
+                    loadingMessage.textContent = 'Comments failed to load. Please refresh the page.';
+                    loadingMessage.style.color = '#ff6b6b';
+                }
+            };
+            
+            utterancesContainer.appendChild(script);
+            
+            // Safari fallback: Hide loading message after 10 seconds regardless
+            setTimeout(() => {
+                if (loadingMessage && loadingMessage.style.display !== 'none') {
+                    loadingMessage.style.display = 'none';
+                }
+            }, 10000);
+            
+        }, 200); // Slightly longer delay for Safari
     };
 
     const loadArticlesList = () => {
