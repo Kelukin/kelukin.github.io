@@ -45,8 +45,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Insert article content before comments section
                     const commentsSection = articleContainer.querySelector('#comments-section');
                     articleContainer.insertAdjacentHTML('afterbegin', articleHtml);
+                    
+                    // Load Utterances comments after article is loaded
+                    loadUtterancesComments(articleId);
                 });
         }
+    };
+
+    const loadUtterancesComments = (articleId) => {
+        const utterancesContainer = document.getElementById('utterances-container');
+        
+        // Clear any existing comments
+        utterancesContainer.innerHTML = '';
+        
+        // Create Utterances script
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', 'Kelukin/kelukin.github.io');
+        script.setAttribute('issue-term', `article-${articleId}`); // Use article ID as issue term
+        script.setAttribute('theme', 'dark-blue');
+        script.setAttribute('crossorigin', 'anonymous');
+        script.setAttribute('async', '');
+        
+        utterancesContainer.appendChild(script);
     };
 
     const loadArticlesList = () => {
