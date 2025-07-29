@@ -91,29 +91,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // GitHub Authentication Functions
     const initializeAuth = () => {
+        console.log('Initializing authentication...');
+        
+        // Check if GitHub Client ID is configured
+        if (GITHUB_CLIENT_ID === 'YOUR_GITHUB_CLIENT_ID' || !GITHUB_CLIENT_ID) {
+            console.log('GitHub OAuth not configured, showing login disabled state');
+            showLogin();
+            return;
+        }
+        
         // Check for stored token
         githubToken = localStorage.getItem('github_token');
+        console.log('Stored token:', githubToken ? 'Found' : 'None');
         
         // Check for OAuth callback
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         
         if (code && !githubToken) {
-            // Handle OAuth callback
+            console.log('OAuth code found, exchanging for token...');
             exchangeCodeForToken(code);
         } else if (githubToken) {
-            // Verify existing token
+            console.log('Token found, verifying...');
             verifyToken();
         } else {
-            // Show login option
+            console.log('No token or code, showing login');
             showLogin();
         }
     };
 
     const showLogin = () => {
-        document.getElementById('auth-loading').style.display = 'none';
-        document.getElementById('auth-login').style.display = 'block';
-        document.getElementById('auth-user').style.display = 'none';
+        console.log('Showing login interface');
+        const authLoading = document.getElementById('auth-loading');
+        const authLogin = document.getElementById('auth-login');
+        const authUser = document.getElementById('auth-user');
+        const commentForm = document.getElementById('comment-form-container');
+        
+        if (authLoading) authLoading.style.display = 'none';
+        if (authLogin) authLogin.style.display = 'block';
+        if (authUser) authUser.style.display = 'none';
+        if (commentForm) commentForm.style.display = 'none';
+        
+        console.log('Login interface updated');
     };
 
     const showUser = (user) => {
@@ -139,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const verifyToken = async () => {
+        console.log('Verifying GitHub token...');
         try {
             const response = await fetch('https://api.github.com/user', {
                 headers: {
@@ -149,14 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const user = await response.json();
+                console.log('Token verified, user:', user.login);
                 showUser(user);
             } else {
+                console.log('Token invalid, removing and showing login');
                 localStorage.removeItem('github_token');
                 githubToken = null;
                 showLogin();
             }
         } catch (error) {
             console.error('Error verifying token:', error);
+            localStorage.removeItem('github_token');
+            githubToken = null;
             showLogin();
         }
     };
@@ -421,5 +445,21 @@ document.addEventListener('DOMContentLoaded', () => {
     loadArticle();
     loadArticlesList();
     applyTranslations();
-    initializeAuth();
+    
+    // Initialize authentication with fallback
+    try {
+        initializeAuth();
+    } catch (error) {
+        console.error('Error initializing auth:', error);
+        showLogin();
+    }
+    
+    // Fallback timeout to ensure UI never gets stuck on "Checking authentication..."
+    setTimeout(() => {
+        const authLoading = document.getElementById('auth-loading');
+        if (authLoading && authLoading.style.display !== 'none') {
+            console.log('Auth initialization timeout, forcing login display');
+            showLogin();
+        }
+    }, 3000);
 });
