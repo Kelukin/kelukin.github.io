@@ -60,16 +60,26 @@
             // Use the state param to get the return URL
             let returnUrl = '/';
             const state = urlParams.get('state');
+            console.log('OAuth callback state param:', state);
             if (state) {
                 try {
                     returnUrl = decodeURIComponent(state);
-                } catch (e) {}
+                } catch (e) { console.error('Failed to decode state:', e); }
+            } else if (document.referrer && document.referrer.includes('article.html')) {
+                // Fallback: try to use referrer if available
+                returnUrl = document.referrer;
             }
+            console.log('OAuth callback returnUrl:', returnUrl);
             // Remove any existing code param from returnUrl
-            let url = new URL(returnUrl, window.location.origin);
-            url.searchParams.set('code', code);
-            // Redirect back to the article page with code param
-            window.location.href = url.toString();
+            try {
+                let url = new URL(returnUrl, window.location.origin);
+                url.searchParams.set('code', code);
+                // Redirect back to the article page with code param
+                window.location.href = url.toString();
+            } catch (e) {
+                // If URL parsing fails, just go to homepage with code
+                window.location.href = '/?code=' + code;
+            }
         } else {
             document.querySelector('.callback-container').innerHTML = `
                 <h2>Invalid Callback</h2>
