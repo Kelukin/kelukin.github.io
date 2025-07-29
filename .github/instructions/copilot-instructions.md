@@ -1,9 +1,15 @@
 # Copilot Instructions for Kelukin's Personal Website
 
 ## Project Overview
-This is a bilingual (English/Chinese) personal portfolio website built with vanilla HTML/CSS/JavaScript. The site features automatic language detection, a blog system with markdown articles, and modern dark theme design with glassmorphism effects.
+This is a bilingual (English/Chinese) personal portfolio website built with vanilla HTML/CSS/JavaScript. The site features automatic language detection, a blog system with markdown articles, secure GitHub-based comments via Utterances, and modern dark theme design with glassmorphism effects.
 
 ## Architecture & Key Components
+- `script.js`: Main translation system and article loading logic
+- `article.js`: Clean, secure article page functionality with Utterances comments
+- `style.css`: Complete styling with mobile-first responsive design
+- `articles.json`: Single source of truth for article metadata
+- `DEPLOY_GUIDE.md`: Step-by-step GitHub Pages deployment
+- `SECURE_COMMENTS_SETUP.md`: Utterances comment system setup guide
 
 ### Bilingual Translation System
 - **Core Pattern**: All translatable text uses `data-key` attributes in HTML elements
@@ -17,9 +23,14 @@ Example pattern:
 ```
 
 ### Comment System
-- **Implementation** Relies on GitHub Issues for article comments
-- **Linking**: Each article's comments are linked to its GitHub issue via `data-key="comments-link"`
-- **Display**: Comments are fetched and displayed dynamically in the article. 
+- **Implementation**: Uses **Utterances** - a secure, GitHub Issues-based comment system
+- **Security**: No client secrets required - completely safe for public repositories
+- **Authentication**: Users login through GitHub's secure OAuth flow (managed by Utterances)
+- **Issue Creation**: Automatically creates GitHub issues using article pathname as identifier
+- **Features**: Real-time comments, reactions, notifications, mobile-responsive design
+- **Setup**: Requires only Utterances GitHub App installation - no complex configuration
+- **Theme**: Built-in dark theme support that matches the site's aesthetic
+- **Bilingual**: No special language handling needed - works with any locale
 
 ### Article System Architecture
 - **Metadata**: `articles.json` contains bilingual titles, summaries, dates, and IDs
@@ -70,15 +81,17 @@ Example pattern:
 
 ## Critical Files
 - `script.js`: Main translation system and article loading logic
-- `article.js`: Individual article page functionality with sidebar
+- `article.js`: Clean, secure article page functionality with Utterances comments
 - `style.css`: Complete styling with mobile-first responsive design
 - `articles.json`: Single source of truth for article metadata
 - `DEPLOY_GUIDE.md`: Step-by-step GitHub Pages deployment
+- `SECURE_COMMENTS_SETUP.md`: Utterances comment system setup guide
 
 ## External Dependencies
 - **Google Fonts**: Montserrat typeface
 - **Font Awesome**: Social media icons
 - **marked.js**: Client-side markdown parsing
+- **Utterances**: Secure GitHub Issues-based comment system
 - **CDN**: All dependencies loaded via CDN, no build system
 
 When working with this codebase, always consider bilingual impact, test mobile responsiveness, and maintain the established dark theme aesthetic with Spotify green accents.
