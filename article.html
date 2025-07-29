@@ -21,12 +21,55 @@
                 <!-- Article content will be loaded here -->
                 <div id="comments-section" class="comments-container">
                     <h3 data-key="commentsTitle">Comments</h3>
+                    
+                    <!-- Authentication Status -->
+                    <div id="auth-status" class="auth-container">
+                        <div id="auth-loading" class="auth-loading" data-key="authLoading">Checking authentication...</div>
+                        <div id="auth-login" class="auth-login" style="display: none;">
+                            <button id="github-login-btn" class="auth-btn" data-key="loginWithGitHub">
+                                🔐 Login with GitHub to Comment
+                            </button>
+                        </div>
+                        <div id="auth-user" class="auth-user" style="display: none;">
+                            <img id="user-avatar" class="user-avatar" alt="User Avatar">
+                            <span id="user-name" class="user-name"></span>
+                            <button id="logout-btn" class="logout-btn" data-key="logout">Logout</button>
+                        </div>
+                    </div>
+
+                    <!-- Comment Form -->
+                    <div id="comment-form-container" class="comment-form-container" style="display: none;">
+                        <div class="comment-form">
+                            <textarea id="comment-input" placeholder="Write your comment... (Markdown supported)" 
+                                     data-key-placeholder="commentPlaceholder"></textarea>
+                            <div class="comment-form-actions">
+                                <button id="submit-comment-btn" class="submit-btn" data-key="submitComment">
+                                    💬 Post Comment
+                                </button>
+                                <button id="preview-btn" class="preview-btn" data-key="previewComment">
+                                    👁️ Preview
+                                </button>
+                            </div>
+                        </div>
+                        <div id="comment-preview" class="comment-preview" style="display: none;"></div>
+                    </div>
+
+                    <!-- Comments List -->
                     <div id="comments-list">
                         <div class="loading-comments" data-key="loadingComments">Loading comments...</div>
                     </div>
+                    
+                    <!-- Load More Comments -->
+                    <div id="load-more-container" class="load-more-container" style="display: none;">
+                        <button id="load-more-btn" class="load-more-btn" data-key="loadMoreComments">
+                            Load More Comments
+                        </button>
+                    </div>
+
+                    <!-- Alternative Action -->
                     <div class="comment-action">
-                        <a id="add-comment-link" href="#" target="_blank" class="comment-btn" data-key="addComment">
-                            💬 Join the Discussion on GitHub
+                        <a id="add-comment-link" href="#" target="_blank" class="comment-btn" data-key="joinDiscussion">
+                            💬 Join Discussion on GitHub
                         </a>
                     </div>
                 </div>

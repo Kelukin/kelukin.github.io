@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub OAuth Callback</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .callback-container {
+            text-align: center;
+            padding: 2rem;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #1db954;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-container">
+        <div class="spinner"></div>
+        <h2>Authenticating with GitHub...</h2>
+        <p>Please wait while we complete the authentication process.</p>
+    </div>
+
+    <script>
+        // Extract the authorization code from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+
+        if (error) {
+            document.querySelector('.callback-container').innerHTML = `
+                <h2>Authentication Error</h2>
+                <p>There was an error during authentication: ${error}</p>
+                <p><a href="#" onclick="window.close()">Close this window</a></p>
+            `;
+        } else if (code) {
+            // Store the code temporarily and redirect back to article page
+            sessionStorage.setItem('github_oauth_code', code);
+            
+            // Get the return URL (article page)
+            const returnUrl = sessionStorage.getItem('oauth_return_url') || '/';
+            
+            // Redirect back to the article page
+            window.location.href = returnUrl;
+        } else {
+            document.querySelector('.callback-container').innerHTML = `
+                <h2>Invalid Callback</h2>
+                <p>No authorization code received from GitHub.</p>
+                <p><a href="#" onclick="window.close()">Close this window</a></p>
+            `;
+        }
+    </script>
+</body>
+</html>
