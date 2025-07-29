@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             noComments: "No comments yet. Be the first to share your thoughts!",
             joinDiscussion: "💬 Join Discussion on GitHub",
             commentError: "Unable to load comments. You can still join the discussion on GitHub.",
+            rateLimitTitle: "GitHub API Rate Limit Reached",
+            rateLimitMessage: "Please try again later, or view comments directly on GitHub.",
             authLoading: "Checking authentication...",
             loginWithGitHub: "🔐 Login with GitHub to Comment",
             logout: "Logout",
@@ -27,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             noComments: "暂无评论。快来分享你的想法吧！",
             joinDiscussion: "💬 在 GitHub 上参与讨论",
             commentError: "无法加载评论。你仍然可以在 GitHub 上参与讨论。",
+            rateLimitTitle: "已达到 GitHub API 访问限制",
+            rateLimitMessage: "请稍后再试，或直接在 GitHub 上查看评论。",
             authLoading: "检查登录状态...",
             loginWithGitHub: "🔐 使用 GitHub 登录来评论",
             logout: "登出",
@@ -48,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let commentsPerPage = 10;
     let totalComments = 0;
     let loadedComments = 0;
+    let commentsCache = {}; // Simple cache to reduce API calls
 
     // GitHub OAuth Configuration
     const GITHUB_CLIENT_ID = 'Ov23liCZWfsSMv0NFMkT'; // You'll need to set this
@@ -233,27 +238,82 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadComments = async (issueNumber, page = 1) => {
         const commentsContainer = document.getElementById('comments-list');
         
+        // Check cache first
+        const cacheKey = `${issueNumber}-${page}`;
+        if (commentsCache[cacheKey]) {
+            const cached = commentsCache[cacheKey];
+            if (page === 1 && cached.comments.length === 0) {
+                commentsContainer.innerHTML = `<div class="no-comments" data-key="noComments">${translations[currentLanguage].noComments}</div>`;
+            } else if (page === 1) {
+                commentsContainer.innerHTML = cached.comments.map(comment => createCommentHTML(comment)).join('');
+                loadedComments = cached.comments.length;
+            } else {
+                cached.comments.forEach(comment => {
+                    commentsContainer.insertAdjacentHTML('beforeend', createCommentHTML(comment));
+                });
+                loadedComments += cached.comments.length;
+            }
+            
+            totalComments = cached.totalComments;
+            const loadMoreContainer = document.getElementById('load-more-container');
+            if (loadedComments < totalComments) {
+                loadMoreContainer.style.display = 'block';
+                commentsPage = page;
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+            return;
+        }
+        
         if (page === 1) {
             commentsContainer.innerHTML = '<div class="loading-comments" data-key="loadingComments">Loading comments...</div>';
             applyTranslations();
         }
         
         try {
-            // First, get the issue to check total comments
-            const issueResponse = await fetch(`https://api.github.com/repos/Kelukin/kelukin.github.io/issues/${issueNumber}`);
-            if (issueResponse.ok) {
-                const issue = await issueResponse.json();
-                totalComments = issue.comments;
+            // Prepare headers for authenticated requests if token is available
+            const headers = {
+                'Accept': 'application/vnd.github.v3+json'
+            };
+            if (githubToken) {
+                headers['Authorization'] = `token ${githubToken}`;
+            }
+
+            // For page 1, get issue info to check total comments, otherwise skip this API call
+            if (page === 1) {
+                const issueResponse = await fetch(`https://api.github.com/repos/Kelukin/kelukin.github.io/issues/${issueNumber}`, { headers });
+                if (issueResponse.ok) {
+                    const issue = await issueResponse.json();
+                    totalComments = issue.comments;
+                } else if (issueResponse.status === 403) {
+                    const errorData = await issueResponse.json();
+                    if (errorData.message && errorData.message.includes('rate limit')) {
+                        throw new Error('RATE_LIMIT');
+                    }
+                }
             }
 
             // Then fetch comments for the current page
-            const response = await fetch(`https://api.github.com/repos/Kelukin/kelukin.github.io/issues/${issueNumber}/comments?per_page=${commentsPerPage}&page=${page}`);
+            const response = await fetch(`https://api.github.com/repos/Kelukin/kelukin.github.io/issues/${issueNumber}/comments?per_page=${commentsPerPage}&page=${page}`, { headers });
             
             if (!response.ok) {
+                if (response.status === 403) {
+                    const errorData = await response.json();
+                    if (errorData.message && errorData.message.includes('rate limit')) {
+                        throw new Error('RATE_LIMIT');
+                    }
+                }
                 throw new Error('Failed to fetch comments');
             }
             
             const comments = await response.json();
+            
+            // Cache the results
+            commentsCache[cacheKey] = {
+                comments: comments,
+                totalComments: totalComments,
+                timestamp: Date.now()
+            };
             
             if (page === 1 && comments.length === 0) {
                 commentsContainer.innerHTML = `<div class="no-comments" data-key="noComments">${translations[currentLanguage].noComments}</div>`;
@@ -281,7 +341,22 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error loading comments:', error);
             if (page === 1) {
-                commentsContainer.innerHTML = `<div class="no-comments" data-key="commentError">${translations[currentLanguage].commentError}</div>`;
+                if (error.message === 'RATE_LIMIT') {
+                    commentsContainer.innerHTML = `
+                        <div class="rate-limit-notice">
+                            <p><strong>GitHub API Rate Limit Reached</strong></p>
+                            <p>${currentLanguage === 'zh' ? 
+                                '已达到 GitHub API 访问限制。请稍后再试，或者' : 
+                                'GitHub API rate limit reached. Please try again later, or'
+                            }</p>
+                            <a href="https://github.com/Kelukin/kelukin.github.io/issues/${issueNumber}" target="_blank" class="github-link">
+                                💬 ${currentLanguage === 'zh' ? '在 GitHub 上查看评论' : 'View Comments on GitHub'}
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    commentsContainer.innerHTML = `<div class="no-comments" data-key="commentError">${translations[currentLanguage].commentError}</div>`;
+                }
             }
         }
     };
@@ -362,6 +437,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const newComment = await response.json();
+                
+                // Clear the cache since we have new comments
+                commentsCache = {};
+                
                 // Add the new comment to the top of the list
                 const commentsContainer = document.getElementById('comments-list');
                 commentsContainer.insertAdjacentHTML('afterbegin', createCommentHTML(newComment));

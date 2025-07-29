@@ -416,6 +416,39 @@ h2 {
     margin-bottom: 2rem;
 }
 
+.rate-limit-notice {
+    background: #2a1810;
+    border: 1px solid #d4602a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.rate-limit-notice p {
+    margin: 0.5rem 0;
+    color: #e0e0e0;
+}
+
+.rate-limit-notice strong {
+    color: #d4602a;
+}
+
+.rate-limit-notice .github-link {
+    display: inline-block;
+    background: #1db954;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.rate-limit-notice .github-link:hover {
+    background: #169c46;
+}
+
 .comment {
     background: #1a1a1a;
     border-radius: 8px;
