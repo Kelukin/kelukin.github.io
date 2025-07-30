@@ -1,4 +1,31 @@
 body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* General link styles */
+a {
+    color: #1db954;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1ed760;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #169c46;
+}
+
+a:visited {
+    color: #1aa14a;
+}
+
 /* Mobile optimization for article page */
 @media (max-width: 600px) {
     .article-layout {
@@ -19,19 +46,10 @@ body {
         font-size: 1.2rem;
         margin-bottom: 1rem;
     }
-    #sidebar ul {
-        padding: 0;
-    }
     #sidebar li a {
         font-size: 1rem;
         padding: 8px;
     }
-}
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    background-color: #121212;
-    color: #e0e0e0;
-    line-height: 1.6;
 }
 
 /* Mobile optimization */
@@ -199,6 +217,24 @@ h2 {
     border-radius: 8px;
     margin: 2rem auto;
     max-width: 800px;
+}
+
+/* Article content links */
+.article-container a {
+    color: #1db954;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.article-container a:hover {
+    color: #1ed760;
+    background-color: rgba(29, 185, 84, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.article-container a:visited {
+    color: #1aa14a;
 }
 
 .article-card {
@@ -501,6 +537,23 @@ h2 {
     padding: 2px 6px;
     border-radius: 3px;
     color: #1db954;
+}
+
+.comment-body a {
+    color: #1db954;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.comment-body a:hover {
+    color: #1ed760;
+    background-color: rgba(29, 185, 84, 0.1);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+.comment-body a:visited {
+    color: #1aa14a;
 }
 
 .comment-body pre {
